@@ -4,8 +4,8 @@
   "description": "ricks optimized web portfolio",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ws"
+    "test": "ws -d src",
+    "start": "ws -d dist -c"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,11 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-compress": "^1.4.3",
     "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^2.2.0",
+    "grunt-contrib-htmlmin": "^2.4.0",
+    "grunt-contrib-imagemin": "^1.0.1",
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-uglify": "^2.3.0",
     "grunt-mkdir": "^1.0.0",
@@ -30,5 +34,9 @@
   "local-web-server": {
     "port": 8100,
     "forbid": "*.json"
+  },
+  "dependencies": {
+    "imagemin": "^5.3.1",
+    "imagemin-mozjpeg": "^6.0.0"
   }
 }

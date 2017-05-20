@@ -5,39 +5,80 @@
   "grunt clean" removes the images directory
   "grunt responsive_images" re-processes images without removing the old ones
 */
+var mozjpeg = require('imagemin-mozjpeg');
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   grunt.initConfig({
-	  jshint: {
-    all: ['Gruntfile.js', 'js/*.js', 'views/js/*.js']
-  },
-	    uglify: {
-    my_target: {
-      files: {
-        'dest/output.min.js': ['js/perfmatters.js'],
-		'dest/main.min.js': ['views/js/main.js']
+    pkg: grunt.file.readJSON('package.json'),
+    copy: {
+      main: {
+        expand: true,
+        cwd: 'src',
+        src: '**',
+        dest: 'dist/',
+      },
+    },
+    jshint: {
+      all: ['gruntfile.js', 'src/js/**/*.js', 'src/views/js/**/*.js']
+    },
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+      },
+      dist: {
+        files: {
+          'dist/js/perfmatters.js': ['src/js/perfmatters.js'],
+          'dist/views/js/main.js': ['src/views/js/main.js']
+        }
       }
-    }
-  },
+    },
+    cssmin: {
+      target: {
+        files: [{
+          expand: true,
+          cwd: 'src/css',
+          src: ['*.css', '!*.min.css'],
+          dest: 'dist/css'
+        }]
+      }
+    },
+    htmlmin: { // Task
+      dist: { // Target
+        options: { // Target options
+          removeComments: true,
+          collapseWhitespace: true
+        }
+      },
+      dev: { // Another target
+        options: { // Target options
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: [{
+          expand: true,
+          cwd: 'src',
+          src: ['src/**/*.html', '*.html'],
+          dest: 'dist'
+        }]
+      }
+    },
     responsive_images: {
       dev: {
         options: {
           sizes: [{
-            /* Change these */
-            width: 1600,
-            quality: 30
-          },
-          {
-            /* Change these */
-            width: 800,
-            quality: 30
-          },
-		  {
-            /* Change these */
-            width: 240,
-            quality: 30
-          }
+              /* Change these */
+              name: "opt",
+              height: 600,
+              quality: 80
+            },
+            {
+              /* Change these */
+              name: "opt",
+              height: 50,
+              quality: 80,
+              suffix: "-sm"
+            }
           ]
         },
 
@@ -46,18 +87,25 @@ module.exports = function(grunt) {
         the directory structure.
         */
         files: [{
-          expand: true,
-          src: ['*.{gif,jpg,png}'],
-          cwd: 'img_src/',
-          dest: 'img/'
-        }]
+            expand: true,
+            src: ['*.{gif,jpg,png}'],
+            cwd: 'src/img/org/',
+            dest: 'src/img/'
+          },
+          {
+            expand: true,
+            src: ['*.{gif,jpg,png}'],
+            cwd: 'src/views/img/org/',
+            dest: 'src/views/img/'
+          }
+        ]
       }
     },
 
     /* Clear out the images directory if it exists */
     clean: {
       dev: {
-        src: ['img'],
+        src: ['dist/*', 'src/img/*.{gif,jpg,png}']
       },
     },
 
@@ -65,19 +113,52 @@ module.exports = function(grunt) {
     mkdir: {
       dev: {
         options: {
-          create: ['img']
+          create: ['dist/img']
         },
       },
     },
-
+    imagemin: { // Task 
+      static: { // Target 
+        options: { // Target options 
+          optimizationLevel: 3,
+          svgoPlugins: [{
+            removeViewBox: false
+          }],
+          use: [mozjpeg()]
+        },
+      },
+      dynamic: { // Another target 
+        files: [{
+          expand: true, // Enable dynamic expansion 
+          cwd: 'dist/img', // Src matches are relative to this path 
+          src: ['**/*.{png,jpg,gif}'], // Actual patterns to match 
+          dest: 'dist/img' // Destination path prefix 
+        }]
+      }
+    },
+    compress: {
+      main: {
+        options: {
+          mode: 'gzip'
+        },
+        expand: true,
+        cwd: 'src/css',
+        src: ['**/*'],
+        dest: 'dist/css'
+      }
+    }
   });
-  
+
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-responsive-images');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-mkdir');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.registerTask('default', ['clean', 'mkdir', 'responsive_images', 'uglify']);
-
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.registerTask('default', ['clean', 'responsive_images', 'copy', 'uglify']);
+  grunt.registerTask('build', ['clean', 'responsive_images', 'copy', 'imagemin', 'jshint', 'uglify', 'cssmin', 'htmlmin']);
 };
