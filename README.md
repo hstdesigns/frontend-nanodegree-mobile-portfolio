@@ -16,9 +16,10 @@ You will optimize a provided website with a number of optimization- and performa
 - [Changelog](#changelog)
 
 ## Features
-- **60fps** scrolling experience
-- PageSpeed score of 100 for mobile user experience :)
-- PageSpeed score of 97 for desktop user experience
+- consistent frame-rate at **60fps** when scrolling
+- *index.html* achieves a PageSpeed score of 100 for mobile user experience :) (with `ngrok -c` | compression mode)
+- *index.html* achieves a PageSpeed score of 97 for desktop user experience (with `ngrok -c` | compression mode)
+- time to resize pizzas is less than 5 ms on the *views/pizza.html* page
 
 ## Prerequisites
 - [Node.js 6.1+](http://nodejs.org) (Download the latest LTS version)
@@ -46,6 +47,8 @@ grunt build
 # Start the webserver
 npm start
 ```
+**Note:** The *dist* folder will recreated if you run `grunt build`.
+
 Now, open your browser and enjoy :)
 http://127.0.0.1:8100
 
@@ -81,7 +84,7 @@ Use this url for Google PageSpeed Insights (https://developers.google.com/speed/
 | gruntfile.js                          | The Gruntfile                                                 |
 | package.json                          | NPM dependencies                                              |
 
-**Note:** The *dist/.* folder will recreated if you run `grunt build`.
+**Note:** The *dist* folder will recreated if you run `grunt build`.
 
 ## List of Grunt Packages
 | Package                   | Description                                                       |
@@ -104,6 +107,13 @@ Use this url for Google PageSpeed Insights (https://developers.google.com/speed/
 
 ### 1.1.0 (May 21, 2017)
 - Final release
+- increase the pizza scrolling performance
+    - added the requestAnimationFrame() funtion
+    - created a pizzaItems variable to decrease the document function calls
+-  *index.html* critical rendering path performance improvements
+    - added the JavaScript and CSS resources just before the closing body tag
+    - added the `async` attribute to the *js/perfmatters.js* script tag
+    - added the `media="print"` attribute to the *css/print.css* link tag
 
 ### 1.0.0 (February 8, 2017)
 - Initial version
