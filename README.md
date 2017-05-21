@@ -1,5 +1,6 @@
 # Website Performance Optimization portfolio project
 Author: Rick
+
 **Live Demo**: https://hstdesigns.github.io/frontend-nanodegree-mobile-portfolio/dist
 
 **Project Submission:**
@@ -10,7 +11,7 @@ You will optimize a provided website with a number of optimization- and performa
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
-- [List of Packages](#list-of-grunt-packages)
+- [List of Grunt Packages](#list-of-grunt-packages)
 - [Useful Tools and Resources](#useful-tools-and-resources)
 - [Changelog](#changelog)
 
