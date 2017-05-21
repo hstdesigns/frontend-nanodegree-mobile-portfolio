@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content=" FILL ME IN ">
-    <meta name="author" content=" FILL ME IN ">
-    <title>Cameron Pittman: Portfolio</title>
+    <meta name="description" content="Project CRP optimization">
+    <meta name="author" content="rick">
+    <title>Ricks: Portfolio</title>
 
     <!--
     <script>
@@ -30,8 +30,8 @@
 
 <body>
     <header>
-        <a href="/"><img src="img/profilepic-opt.jpg"></a>
-        <p>Cameron Pittman<br><span>Course Developer</span></p>
+        <a href="#"><img src="img/profilepic-opt.jpg" alt="profilepic"></a>
+        <p>Rick<br><span>Frontend Web Developer</span></p>
     </header>
 
     <div class="container">
@@ -44,25 +44,25 @@
         <div class="content">
             <ul>
                 <li>
-                    <img src="img/2048-opt-sm.png">
+                    <img src="img/2048-opt-sm.png" alt="2048">
                     <a href="project-2048.html">Build Your Own 2048!</a>
                     <p>I made my own version of 2048. How cool is that!?</p>
                 </li>
 
                 <li>
-                    <img src="img/cam_be_like-opt-sm.jpg">
+                    <img src="img/cam_be_like-opt-sm.jpg" alt="cam_be_like">
                     <a href="project-webperf.html">Website Performance Optimization</a>
                     <p>Hey... this class looks familiar.</p>
                 </li>
 
                 <li>
-                    <img src="img/mobilewebdev-opt-sm.jpg">
+                    <img src="img/mobilewebdev-opt-sm.jpg" alt="mobilewebdev">
                     <a href="project-mobile.html">Mobile Web Development</a>
                     <p>Making mobile apps isn't so hard after all.</p>
                 </li>
 
                 <li>
-                    <img src="views/img/pizzeria-opt-sm.jpg">
+                    <img src="views/img/pizzeria-opt-sm.jpg" alt="pizzeria">
                     <a href="views/pizza.html">Cam's Pizzeria</a>
                     <p>Who wants a performant pizza?</p>
                 </li>
@@ -73,9 +73,13 @@
             <p>&copy; Web Performance 2017 <span id="crp-stats"></span></p>
         </footer>
     </div>
+    <!-- async tag - no document.write() - no problem -->
     <script async src="js/perfmatters.js"></script>
+    <!-- to achieve a mobile pagespeed score of 100 -->
     <link href="css/style.css" rel="stylesheet">
+    <!-- it doesn't matter - the impact is minimal ~6ms more' -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <!-- the last resource is only needed for printing -->
     <link href="css/print.css" rel="stylesheet" media="print">
 </body>
 

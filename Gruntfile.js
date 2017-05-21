@@ -4,6 +4,7 @@
   "grunt" alone creates a new, completed images directory
   "grunt clean" removes the images directory
   "grunt responsive_images" re-processes images without removing the old ones
+  "grunt build" recreates the dist directory for production use
 */
 var mozjpeg = require('imagemin-mozjpeg');
 
@@ -11,18 +12,18 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    copy: {
+    copy: { // copy src/. to dist/
       main: {
         expand: true,
         cwd: 'src',
         src: '**',
-        dest: 'dist/',
+        dest: 'dist',
       },
     },
-    jshint: {
+    jshint: { // check js syntax
       all: ['gruntfile.js', 'src/js/**/*.js', 'src/views/js/**/*.js']
     },
-    uglify: {
+    uglify: { // minify js files
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
       },
@@ -33,7 +34,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    cssmin: {
+    cssmin: { // minify css files
       target: {
         files: [{
           expand: true,
@@ -63,7 +64,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-    responsive_images: {
+    responsive_images: {  // resize images 
       dev: {
         options: {
           sizes: [{
@@ -136,17 +137,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-    compress: {
-      main: {
-        options: {
-          mode: 'gzip'
-        },
-        expand: true,
-        cwd: 'src/css',
-        src: ['**/*'],
-        dest: 'dist/css'
-      }
-    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -158,7 +148,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
-  grunt.loadNpmTasks('grunt-contrib-compress');
-  grunt.registerTask('default', ['clean', 'responsive_images', 'copy', 'uglify']);
+  grunt.registerTask('default', ['clean', 'responsive_images', 'copy', 'jshint', 'uglify']);
   grunt.registerTask('build', ['clean', 'responsive_images', 'copy', 'imagemin', 'jshint', 'uglify', 'cssmin', 'htmlmin']);
 };

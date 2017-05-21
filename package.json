@@ -4,8 +4,9 @@
   "description": "ricks optimized web portfolio",
   "main": "index.js",
   "scripts": {
-    "test": "ws -d src",
-    "start": "ws -d dist -c"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ws -d dist -c",
+    "src": "ws -d src"
   },
   "repository": {
     "type": "git",
