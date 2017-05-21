@@ -1,55 +1,111 @@
-## Website Performance Optimization portfolio project
+# Website Performance Optimization portfolio project
+Author: Rick
+**Live Demo**: https://hstdesigns.github.io/frontend-nanodegree-mobile-portfolio/dist
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+**Project Submission:**
+You will optimize a provided website with a number of optimization- and performance-related issues so that it achieves a target PageSpeed score and runs at 60 frames per second.
 
-To get started, check out the repository and inspect the code.
+## Table of Contents
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [List of Packages](#list-of-grunt-packages)
+- [Useful Tools and Resources](#useful-tools-and-resources)
+- [Changelog](#changelog)
 
-### Getting started
+## Features
+- **60fps** scrolling experience
+- PageSpeed score of 100 for mobile user experience :)
+- PageSpeed score of 97 for desktop user experience
 
-#### Part 1: Optimize PageSpeed Insights score for index.html
+## Prerequisites
+- [Node.js 6.1+](http://nodejs.org) (Download the latest LTS version)
+- [NPM](https://www.npmjs.com/) package manager for JavaScript
+- [Grunt](https://gruntjs.com/) JavaScript Task Runner
+- [Git](https://git-scm.com/downloads) is a free and open source distributed version control system
+- Command Line Tools
 
-Some useful tips to help you get started:
+## Getting Started
+The easiest way to get started is to clone the repository:
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+```bash
+# Get the latest snapshot
+git clone https://github.com/hstdesigns/frontend-nanodegree-mobile-portfolio.git
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+# Change directory
+cd frontend-nanodegree-mobile-portfolio
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to the top-level of your project directory to make your local server accessible remotely.
+# Install NPM dependencies
+npm install
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ./ngrok http 8080
-  ```
+# Build dist environment
+grunt build
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+# Start the webserver
+npm start
+```
+Now, open your browser and enjoy :)
+http://127.0.0.1:8100
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
+### Test the locally website with Google PageSpeed
+Download and install [ngrok](https://ngrok.com/).
+**Note:** Ngrok creates a public HTTPS URL for a web site running locally on your development machine.
 
-#### Part 2: Optimize Frames per Second in pizza.html
+```bash
+# Open a new terminal window and type
+ngrok http 8100
+```
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
+Open the new generate https url in your browser.
+For example:
+https://d67a1234.ngrok.io
+Use this url for Google PageSpeed Insights (https://developers.google.com/speed/pagespeed/insights/).
 
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
+## Project Structure
+| Name                                  | Description                                                   |
+| ------------------------------------- | ------------------------------------------------------------- |
+| **dist**/*.*                          | Static assets (html, css, js, img) **minified version**       |
+| **src**/                              | Static assets (html, css, js, img)                            |
+| **src/js**/*.js                       | perfmatters.js to measure the Critical Rendering Path         |
+| **src/css**/*.css                     | Main stylesheets portfolio                                    |
+| **src/img**/*.{gif,jpg,png}           | with grunt optimized and renamed images                       |
+| **src/img/org**/*.{gif,jpg,png}       | original images without optimization and resizing             |
+| **src/views**/                        | Static assets (html, css, js, img)                            |
+| **src/views/js**/*.js                 | Main.js the pizza 60fps project engine                        |
+| **src/views/css**/*.css               | Main stylesheets pizza site                                   |
+| **src/views/img**/*.{gif,jpg,png}     | With grunt optimized and renamed images                       |
+| **src/views/img/org**/*.{gif,jpg,png} | Original images without optimization and resizing             |
+| .gitignore                            | Exclude the node_modules folder                               |
+| gruntfile.js                          | The Gruntfile                                                 |
+| package.json                          | NPM dependencies                                              |
 
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
+**Note:** The *dist/.* folder will recreated if you run `grunt build`.
 
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
+## List of Grunt Packages
+| Package                   | Description                                                       |
+| ------------------------- | ----------------------------------------------------------------- |
+| grunt-contrib-copy        | copy src --> dist                                                 |
+| grunt-responsive-images   | resize and rename images                                          |
+| grunt-contrib-clean       | remove files and subfolders                                       |
+| grunt-mkdir               | create new directories                                            |
+| grunt-contrib-uglify      | minify *.js files                                                 |
+| grunt-contrib-jshint      | test JavaScript syntax                                            |
+| grunt-contrib-cssmin      | minify *.css files                                                |
+| grunt-contrib-htmlmin     | minify *.html files                                               |
+| grunt-contrib-imagemin    | optimization and lossy compression to shrink JPEG and PNG images  |
 
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+## Useful Tools and Resources
+- [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) - You can identify ways to make your site faster and more mobile-friendly.
+- [DILLINGER](http://dillinger.io/) - Dillinger is an online cloud-enabled, HTML5, buzzword-filled Markdown editor.
+
+## Changelog
+
+### 1.1.0 (May 21, 2017)
+- Final release
+
+### 1.0.0 (February 8, 2017)
+- Initial version
+- Added NPM Package Manager
+- Added Grunt
+- Added *node_modules* to *.gitignore*
