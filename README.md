@@ -1,6 +1,8 @@
 # Website Performance Optimization portfolio project
 Author: Rick
 
+Jump to [What's new in 1.1.1?](#changelog)
+
 **Live Demo**: https://hstdesigns.github.io/frontend-nanodegree-mobile-portfolio/dist
 
 **Project Submission:**
@@ -104,6 +106,9 @@ Use this url for Google PageSpeed Insights (https://developers.google.com/speed/
 - [DILLINGER](http://dillinger.io/) - Dillinger is an online cloud-enabled, HTML5, buzzword-filled Markdown editor.
 
 ## Changelog
+
+### 1.1.1 (May 21, 2017)
+- fixed the views/js/main.js file to improve the resize and scrolling performance
 
 ### 1.1.0 (May 21, 2017)
 - Final release
