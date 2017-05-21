@@ -495,9 +495,9 @@ function logAverageFrame(times) { // times is the array of User Timing measureme
 
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
-var pizzaItems = null;
-var ticking = false;
-var lastScrollY = 0;
+var pizzaItems = null;  // my 60fps variable - to decrease the document function calls
+var ticking = false;    // my 60fps variable - for the function updatePositions()
+var lastScrollY = 0;    // my 60fps variable - to decrease the document function calls
 
 // Moves the sliding background pizzas based on scroll position
 function updatePizzaPositions() {
@@ -521,6 +521,7 @@ function updatePizzaPositions() {
 }
 
 // fire the animation updatePizzaPositions frames
+// the 60fps performance function ;)
 function updatePositions() {
     if (!ticking) {
         ticking = true;
